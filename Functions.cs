@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-// global funcions for a project in a static class and with static, public methods
 namespace DungeonLabyrinth
 {
     /* The Functions class contains methods for getting the index of an element in a list based on a
     condition and printing a list with its corresponding index. */
     public static class Functions
     {
-        // get index of element in a chams list which fulfils a condition, return index if there is such an element
         /// <summary>
         /// The function returns the index of a Chamber object in a List based on its name.
         /// </summary>
@@ -71,7 +69,7 @@ namespace DungeonLabyrinth
         /// collection of strings that will be printed to the console. The method PrintAnyList takes
         /// this list as input and iterates through each element in the list, printing it along with its
         /// index number.</param>
-        public static void PrintAnyList(List<string> answerList)
+        public static void PrintStringList(List<string> answerList)
         {
             int index = 1;
             foreach (string elem in answerList)
@@ -82,6 +80,18 @@ namespace DungeonLabyrinth
             }
         }
 
+        /// <summary>
+        /// The function filters out items of a specific type from a list of items and returns a list of
+        /// their names in uppercase.
+        /// </summary>
+        /// <param name="items">A list of objects of type Item.</param>
+        /// <param name="filterQuery">The filterQuery parameter is a string that is used to filter out
+        /// items based on their type. The method will only add items to the filtered list if their type
+        /// matches the filterQuery string.</param>
+        /// <returns>
+        /// The method is returning a list of strings that contains the names of items that match the
+        /// filter query. The names are converted to uppercase before being added to the list.
+        /// </returns>
         public static List<string> FilterOutTypeOfItem(List<Item> items, string filterQuery)
         {
             // make a list of healing potion to let a player choose

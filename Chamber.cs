@@ -5,24 +5,20 @@ using System.Text;
 
 
 namespace DungeonLabyrinth
-/* This is a C# class called `Chamber` that represents a chamber in a dungeon labyrinth game. It has
-instance variables such as `visited`, `name`, `monster`, `item`, `isWithPrincess`, `description`,
-`chamIndex`, and `directions`. It also has a constructor method that initializes these instance
-variables with the given values. Additionally, it has a method called `ChooseChamberScene` that
-allows the player to choose a chamber to move to and updates the current state of the game
-accordingly. */
+
 {    
+    /* The Chamber class represents a chamber in a dungeon labyrinth game and contains instance
+    variables and methods for updating the game state. */
     public class Chamber
     {
+        /* These are instance variables of the `Chamber` class in C#. They represent the properties of
+        a chamber in a dungeon labyrinth game. */
         public Boolean visited;
         public String name;
         public Monster monster;
         public Item item;
         public Boolean isWithPrincess;
         public String description;
-        public int chamIndex;
-
-        // possible chamber's door
         public List<int> directions;
 
         /* This is the constructor method for the Chamber class. It takes in several parameters

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace DungeonLabyrinth
 {
-    public class InputHandler
+    /* The InputHandler class provides methods for getting and validating user input based on a list of
+    valid actions and the current state of the program. */
+    public static class InputHandler
     {
-        // as long as the function didn't receive valid input we keep asking for one
-        // inputAtr is an optional argument
         /// <summary>
         /// This function gets user input and validates it against a list of valid actions and the
         /// current state.
@@ -22,7 +22,7 @@ namespace DungeonLabyrinth
         /// </returns>
         public static string GetUserInput(List<string> validActions, CurrentState currentState)
         {
-            Functions.PrintAnyList(validActions); // print possible actions
+            Functions.PrintStringList(validActions); // print possible actions
             Console.Write("Type your choice: ");
             string input = Console.ReadLine().ToUpper();
             // ask for input as long as player is giving the wrong one
@@ -35,7 +35,6 @@ namespace DungeonLabyrinth
             return input;
         }
         
-        // return boolean value if validActions contains input
         /// <summary>
         /// The function validates user input and performs certain actions based on the input.
         /// </summary>
@@ -48,7 +47,7 @@ namespace DungeonLabyrinth
         /// The method returns a boolean value indicating whether the input is contained in the list of
         /// valid actions.
         /// </returns>
-        public static bool ValidateInput(string input, List<string> validActions, CurrentState currentState)
+        private static bool ValidateInput(string input, List<string> validActions, CurrentState currentState)
         {
             if (input.ToUpper() == "-H")
             {

@@ -58,6 +58,14 @@ namespace DungeonLabyrinth
             bool princessFound = false;
             List<string> answerList = new List<string>();
 
+            /* This code block is the main game loop that runs until the princess is found. It uses a
+            `while` loop with the condition `!princessFound` to keep looping until the
+            `princessFound` variable is set to `true`. Within the loop, it uses a `switch` statement
+            to determine which scene the game is currently in based on the
+            `currentState.currentScene` value. Depending on the scene, it calls different methods
+            such as `StartScreen()`, `PlayerChooseAction()`, `ChooseChamberScene()`, or
+            `PlayerFightMonster()`. If the player wins the game, the `GameWon` scene is triggered,
+            and the loop is ended by setting `princessFound` to `true`. */
             while (!princessFound)
             {
                 switch (currentState.currentScene)

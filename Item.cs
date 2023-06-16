@@ -7,10 +7,10 @@ namespace DungeonLabyrinth
     type, and includes a method to display information about the item in uppercase format. */
     public class Item
     {
-        public String name;
-        public String description;
+        public string name;
+        private string description;
         public int strength;
-        public String type;
+        public string type;
 
         /* This is a constructor for the `Item` class that takes in four parameters: `name`,
         `description`, `strength`, and `type`. It initializes the instance variables of the `Item`

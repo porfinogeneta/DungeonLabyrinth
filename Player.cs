@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-// mamy jedną przestrzeń z nazwami, dzięki temu klasy utworzone w projekcie są wszędzie widoczne
 namespace DungeonLabyrinth
 {
    public class Player
     {
+        /* These are instance variables of the `Player` class in C#. */
         public String name;
         public int health;
         public List<Item> equipment;
         public int score;
 
-        // // konstruktor naszego gracza
+        /* This is a constructor for the Player class that takes in four parameters: name (a string),
+        health (an integer), equipment (a list of Item objects), and score (an integer). It sets the
+        corresponding instance variables of the Player object to the values passed in as parameters. */
         public Player(String name, int health, List<Item> equipment, int score)
         {
             this.name = name;
@@ -20,7 +22,17 @@ namespace DungeonLabyrinth
             this.score = score;
         }
         
-        // check if player is holding a certain Item
+        /// <summary>
+        /// The function checks if the player is holding an item of a certain type.
+        /// </summary>
+        /// <param name="type">The parameter "type" is a string that represents the type of item that
+        /// the method is checking if the player is holding. It is used to compare against the "type"
+        /// property of each item in the "equipment" list to see if the player is holding an item of
+        /// that type.</param>
+        /// <returns>
+        /// The method `IsPlayerHolding` returns a boolean value. It returns `true` if the player is
+        /// holding an item of the specified type, and `false` otherwise.
+        /// </returns>
         private bool IsPlayerHolding(string type)
         {
             foreach (Item item in this.equipment)
@@ -33,6 +45,17 @@ namespace DungeonLabyrinth
             return false;
         }
 
+        /// <summary>
+        /// The function handles the player's actions in the game, including discovering the princess,
+        /// looking around a room, attacking or retreating from a monster, picking up items, and
+        /// choosing a room to enter.
+        /// </summary>
+        /// <param name="CurrentState">CurrentState is an object that contains the current state of the
+        /// game, including the current chamber the player is in, the previous chamber the player was
+        /// in, any items the player is holding, and any monsters that may be present. It is used to
+        /// keep track of the game's progress and to make</param>
+        /// <param name="answerList">A list of possible actions that the player can choose from. This
+        /// list is cleared and updated based on the current state of the game.</param>
         public void PlayerChooseAction(CurrentState currentState, List<string> answerList)
         {
             answerList.Clear();
@@ -121,6 +144,17 @@ namespace DungeonLabyrinth
 
         }
 
+        /// <summary>
+        /// This function handles the player's choices during gameplay, including attacking, retreating,
+        /// drinking potions, choosing a room, and picking up items.
+        /// </summary>
+        /// <param name="CurrentState">CurrentState is an object that represents the current state of
+        /// the game. It contains information such as the current room the player is in, the player's
+        /// health and equipment, and the current scene of the game.</param>
+        /// <param name="answerList">answerList is a List of strings that contains the possible actions
+        /// that the player can take in the current state of the game. The HandlePlayerChoice method
+        /// uses this list to prompt the player to choose an action and then handles the player's choice
+        /// accordingly.</param>
         private void HandlePlayerChoice(CurrentState currentState, List<string> answerList)
         {
             Console.WriteLine("Your options:");
@@ -130,7 +164,6 @@ namespace DungeonLabyrinth
             // attack possible only if there is a monster
             if (currentState.currentCham.monster != null)
             {
-                if (currentState.previousCham != null){ Console.WriteLine(currentState.previousCham.name);}
                 if (choice == "ATTACK")
                 {
                     // change scene to fight one
@@ -185,19 +218,16 @@ namespace DungeonLabyrinth
                 
             }
         }
-
-        private void DisplayFightStats(Monster enemy, int chosenWeaponStrength)
-        {
-            // PRINT OUT THE STATS OF PLAYER AND THE ENEMY, make the answers left aligned
-            Console.WriteLine($"{"You ",-15}{this.name,-15}\n" +
-                              $"{"strength: ",-15}{chosenWeaponStrength,-15}\n" +
-                              $"{"health: ",-15}{this.health,-15}\n" +
-                              $"{"",0}\n" +
-                              $"{"Enemy ",-15} {enemy.name}\n" +
-                              $"{"strength: ",-15}{enemy.strength,-15}\n" +
-                              $"{"health: ",-15}{enemy.health,-15}");
-        }
-
+        
+        /// <summary>
+        /// The function allows the player to choose a weapon and fight a monster in a game.
+        /// </summary>
+        /// <param name="CurrentState">CurrentState is an object that contains the current state of the
+        /// game, including the current chamber the player is in, the current room the player is in, and
+        /// any items or monsters present in the room.</param>
+        /// <param name="answerList">A list of possible answers that the player can choose from during
+        /// the fight with a monster. This list includes the option to retreat and any weapons that the
+        /// player has in their equipment.</param>
         public void PlayerFightMonster(CurrentState currentState, List<string> answerList)
         {
             answerList.Clear();
@@ -225,58 +255,7 @@ namespace DungeonLabyrinth
             int chosenWeaponStrength = int.Parse(weaponsAtr[answerList.IndexOf(chosenWeapon)]);
             
             Monster enemy = currentState.currentCham.monster;
-            // as long as player can fight and the monster is alive the fight is going on
-            // before the fight we need to clear the answer list of all the weapons
-            answerList.RemoveRange(1, answerList.Count - 1);
-            Console.WriteLine("Ok, now having a weapon chosen it's time to fight!");
-            Console.WriteLine("Roll your dice to hit! \n The damage of your hit are a random numbers from the range" +
-                              "of 0 to the strength of your weapon.");
-            
-            // add roll to the possible actions
-            answerList.Add("ROLL");
-            while (enemy.health > 0 && this.health > 0)
-            {
-                
-                DisplayFightStats(enemy, chosenWeaponStrength);
-                
-                string ipt = InputHandler.GetUserInput(answerList, currentState);
-                if (ipt == "RETREAT")
-                {
-                    currentState.HandlePlayerRetreat();
-                }
-                else if (ipt == "ROLL")
-                {
-                    Random random = new Random(); // use random module
-                    int playerAttack = random.Next(0, chosenWeaponStrength);
-                    int monsterAttack = random.Next(0, enemy.strength);
-                    // here we use ternary operator to shorten both fight outcomes
-                    Console.WriteLine($"You rolled: {playerAttack}, Your enemy rolled: {monsterAttack}" +
-                                      $"{(playerAttack >= monsterAttack ? "\n YOU WON!" : " \n YOU LOSE")}");
-                    if (playerAttack >= monsterAttack)
-                    {
-                        enemy.health -= playerAttack; // we decrease enemy health if the player won
-                    }
-                    else
-                    {
-                        this.health -= monsterAttack;
-                    }
-                }
-            }
-            // we broke out of the loop so either the player died or the monster is gone,
-            // the fight is over
-            if (this.health <= 0)
-            {
-                Console.WriteLine("You got killed! Hopefully next time it would be better.");
-                currentState.currentScene = DungeonLabyrinthGame.GameScenes.GameOver; // set the scene to game over one
-            }
-            // otherwise it means that the player won
-            else
-            {
-                Console.WriteLine("Congratulations on winning this fight, but will you be able to win others too?");
-                this.score += currentState.currentCham.monster.scoreToGet; // killing a monster gives player score 
-                currentState.currentCham.monster = null; // monster is gone, change scene to ActionForRoom again
-                currentState.currentScene = DungeonLabyrinthGame.GameScenes.ActionForRoom;
-            }
+            enemy.FightWithMonster(this, answerList, chosenWeaponStrength, currentState); // the fighting ground
         }
     }
 }
