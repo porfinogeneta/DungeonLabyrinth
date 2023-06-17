@@ -1,3 +1,9 @@
+// autor: Szymon Mazurek, 338191
+// tytuł: "Dungeons The Text Game"
+// część: Monster.cs, klasa reprezentująca gracza
+// data: 17.06.2023
+
+
 using System;
 using System.Collections.Generic;
 

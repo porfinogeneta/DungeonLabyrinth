@@ -1,3 +1,8 @@
+// autor: Szymon Mazurek, 338191
+// tytuł: "Dungeons The Text Game"
+// część: Item.cs, klasa, reprezentujący element na planszy gry
+// data: 17.06.2023
+
 using System;
 using DungeonLabyrinth;
 

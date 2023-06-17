@@ -1,5 +1,5 @@
 ## Opis Projektu
-Jest to prosta gra tekstowa stworzona z myślą o Kursie pPogramowania Obiektowego
+Jest to prosta gra tekstowa stworzona z myślą o Kursie Pogramowania Obiektowego
 na Uniwersytecie Wrocławskim. Celem gry jest odnalezienie księżniczki
 w labiryncie Mrocznych Lochów. Każda komnata skrywa tajemnice, a także niebezpiecznych wrogów. 
 Gracz (użytkownik terminala) poprzez odpowiednie wpisywanie danych poleceń steruje przebiegiem akcji gry.
@@ -17,9 +17,10 @@ komunikację niepowiązanym ze sobą klasom.
 Na początku gry gracz (użytkownik terminala) znajduje się w jednej z sześciu scen,
 każda związana jest z określonymi wydarzeniami. Te zdarzenia to metody zadeklarowane w różych obiektach, które są właśnie potrzebne.
 Z pewnością warto zauważyć, że do każdej metody przekazujemy obiekty `currentState` i `answerList`.
-Te dwie rzeczy są najważniejszymi elementami gry. Obiekt `currentState` pozwala na obiektom
+Te dwie rzeczy są najważniejszymi elementami gry. Obiekt `currentState` pozwala obiektom
 niepowiązanych klas na komunikację, a `answerList` zawiera nazwy możliwych działań
-dla gracza. Ta lista jest stale aktualizowana zgodnie ze zmianami zachodzącymi w grze.
+dla gracza. Ta lista jest stale aktualizowana zgodnie ze zmianami zachodzącymi w grze. Podczas gry można znaleźć się w niektórych z utworzonych komnat. Każda komnata posiada też listę
+połączeń z innymi komnatami, dzięki czemu gracz może podróżować po mapie gry.
 
 ## Jak grać?
 Podczas gry masz dostęp do wszystkich akcji wymienionych w scenie. Jeśli chcesz wykonać określone
@@ -32,245 +33,244 @@ można również wybrać kilka poleceń, które są zawsze dostępne, takie jak:
 
 # Opis klas i metod
 
+## Chamber
 
-## Komnata
-Klasa Chamber reprezentuje komnatę w grze w labirynt lochów i zawiera instancję
-zmienne i metody aktualizacji stanu gry.
 ### M:ChooseChamberScene(CurrentState,List{String})
-#### Streszczenie
-Funkcja pozwala graczowi wybrać komnatę, do której chce się przenieść i aktualizuje stan gry
+Klasa Chamber reprezentuje komnatę w grze dungeon labyrinth i zawiera zmienne instancji oraz metody aktualizujące stan gry.
+zmienne i metody aktualizacji stanu gry.
+#### Summary
+Funkcja ta pozwala graczowi wybrać komnatę, do której chce się przenieść i odpowiednio aktualizuje stan gry.
 odpowiednio.
 
-#### Parametry
-- `CurrentState`: CurrentState to obiekt, który przechowuje aktualny stan
-  grę, w tym obecną komnatę, w której znajduje się gracz, poprzednią komnatę, w której przebywał gracz
-  w oraz listę wszystkich komnat w grze.
-- `answerList`: Lista możliwych odpowiedzi, z których użytkownik może wybrać w
-  aktualna scena.
+#### Parameters
+- `CurrentState`: CurrentState jest obiektem, który przechowuje aktualny stan
+  gry, w tym aktualną komnatę, w której gracz się znajduje, poprzednią komnatę, w której gracz był
+  oraz listę wszystkich komnat w grze.
+- `answerList`: Lista możliwych odpowiedzi, które użytkownik może wybrać w bieżącej scenie.
+  bieżącej scenie.
 
-## Stan aktulany
-Klasa CurrentState przechowuje informacje o bieżącym stanie gry, w tym m.in
-obecna komnata gracza, lista komnat, aktualna scena gry, poprzednia komnata i gracz
-informacje i zapewnia metody obsługi odwrotu gracza i wyświetlania statystyk gracza oraz
-sprzęt.
+## CurrentState
+Klasa CurrentState przechowuje informacje o aktualnym stanie gry, w tym o
+gracza, listę komnat, aktualną scenę gry, poprzednią komnatę i informacje o graczu.
+i informacje o graczu, a także udostępnia metody do obsługi wycofywania się gracza i wyświetlania jego statystyk i wyposażenia.
+wyposażenie.
 ### M:HandlePlayerRetreat
-#### Streszczenie
-Funkcja obsługuje odwrót gracza poprzez zamianę obecnej komnaty na poprzednią
-komorę i ustawienie bieżącej sceny gry na „ActionForRoom”.
+#### Summary
+Funkcja obsługuje odwrót gracza, zamieniając bieżącą komnatę z poprzednią komnatą
+i ustawiając bieżącą scenę gry na "ActionForRoom".
 
 ### M:ShowPlayerStatistics
-#### Streszczenie
-Funkcja wyświetla imię i nazwisko gracza, jego wynik oraz statystyki wyposażenia.
+#### Summary
+Funkcja ta wyświetla imię gracza, jego wynik i statystyki wyposażenia.
 
 ### M:ShowPlayerEquipment
-#### Streszczenie
-Funkcja wyświetla wyposażenie gracza, przeglądając jego przedmioty i pokazując
+#### Summary
+Funkcja wyświetla wyposażenie gracza, iterując po jego przedmiotach i wyświetlając
 ich informacje.
 
 ## DungeonLabyrinthGame
-Klasa `DungeonLabyrinthGame` definiuje sceny gry, ustawia stan początkowy gry,
-i uruchamia pętlę gry, dopóki księżniczka nie zostanie znaleziona.
-### M:Uciekaj
-#### Streszczenie
-Ta funkcja uruchamia pętlę gry, która przełącza różne sceny gry, aż do
-odnaleziona księżniczka.
+Klasa `DungeonLabyrinthGame` definiuje sceny gry, ustawia początkowy stan gry,
+i uruchamia pętlę gry do momentu odnalezienia księżniczki.
+### M:Run
+#### Summary
+Ta funkcja uruchamia pętlę gry, która przełącza się między różnymi scenami gry, dopóki
+księżniczka zostanie znaleziona.
 
 ### M:SetupChambers
-#### Streszczenie
-Funkcja tworzy listę komnat z różnymi atrybutami, takimi jak potwory, przedmioty i
+#### Summary
+Funkcja ta tworzy listę komnat z różnymi atrybutami, takimi jak potwory, przedmioty i opisy.
 opisy.
 
-#### Zwroty
-Metoda `SetupChambers()` zwraca `List` obiektów `Chamber`.
+#### Returns
+Metoda `SetupChambers()` zwraca `Listę` obiektów `Chamber`.
 
-### M:Ekran startowy
-#### Streszczenie
-Funkcja StartScreen wyświetla wiadomość powitalną i instrukcje dotyczące Lochu
-Gra Labirynt i czeka, aż gracz naciśnie Enter, aby rozpocząć.
+### M:StartScreen
+#### Summary
+Funkcja StartScreen wyświetla komunikat powitalny i instrukcje dotyczące gry Dungeon
+Labiryntu i czeka, aż gracz naciśnie klawisz Enter, aby rozpocząć grę.
 
-## Funkcje
-Klasa Functions zawiera kilka statycznych metod wyszukiwania i filtrowania list obiektów
+## Functions
+Klasa Functions zawiera kilka statycznych metod służących do wyszukiwania i filtrowania list obiektów
 w tekstowej grze przygodowej.
 ### M:DungeonLabyrinth.Functions.GetIdxOfChamber(List{Chamber},String)
-#### Streszczenie
-Funkcja zwraca indeks obiektu Chamber na Liście na podstawie jego nazwy.
+#### Summary
+Funkcja zwraca indeks obiektu Chamber w liście na podstawie jego nazwy.
 
-#### Parametry
+#### Parameters
 - `chams`: Lista obiektów typu Chamber.
-- `nazwa`: Nazwa komory, której szukamy w Liul Chambers
-  (czamy).
+- `name`: Nazwa komory, której szukamy na liście komór (chams)
+  (chams).
 
-#### Zwroty
-Metoda zwraca wartość całkowitą, która reprezentuje indeks pierwszego wystąpienia a
-Obiekt komory o nazwie zgodnej z wprowadzonym ciągiem „nazwa” na podanej Liście izb
-obiekty „chams”. Jeśli nie zostanie znalezione dopasowanie, metoda zwraca 0.
+#### Returns
+Metoda zwraca wartość całkowitą, która reprezentuje indeks pierwszego wystąpienia obiektu
+Chamber o nazwie zgodnej z wejściowym ciągiem "name" na podanej liście obiektów Chamber
+obiektów "chams". Jeśli nie zostanie znalezione żadne dopasowanie, metoda zwraca 0.
 
 ### M:GetIdxOfHealthPotion(List{Item},String)
-#### Streszczenie
-Funkcja zwraca indeks pozycji mikstury zdrowia na liście pozycji.
+#### Summary
+Funkcja zwraca indeks eliksiru zdrowia na liście przedmiotów.
 
-#### Parametry
+#### Parameters
 - `items`: Lista obiektów Item.
-- `nazwa`: Typ szukanej pozycji, reprezentowany jako ciąg znaków. W tym
-  przypadku przyjmuje się, że jest to rodzaj mikstury zdrowia.
+- `name`: Typ wyszukiwanego elementu, reprezentowany jako ciąg znaków. W tym
+  przypadku przyjmuje się, że jest to typ eliksiru zdrowia.
 
-#### Zwroty
-Metoda zwraca wartość całkowitą, która jest indeksem pierwszego elementu na podanej liście
-elementów, które mają typ pasujący do podanego parametru typu. Jeśli nie zostanie znaleziony żaden taki element,
-metoda zwraca 0.
+#### Returns
+Metoda zwraca wartość całkowitą, która jest indeksem pierwszego elementu na danej liście
+elementów, który ma typ pasujący do podanego parametru type. Jeśli taki element nie zostanie znaleziony, metoda
+zwraca 0.
 
 ### M:FilterOutTypeOfItem(List{Item},String)
-#### Streszczenie
+#### Summary
 Funkcja odfiltrowuje elementy określonego typu z listy elementów i zwraca listę
-ich nazwiska wielkimi literami.
+ich nazw zapisanych wielkimi literami.
 
-#### Parametry
+#### Parameters
 - `items`: Lista obiektów typu Item.
-- `filterQuery`: Parametr filterQuery jest ciągiem znaków używanym do odfiltrowania
-  elementy według ich rodzaju. Metoda doda elementy do przefiltrowanej listy tylko wtedy, gdy ich typ
-  pasuje do ciągu filterQuery.
+- `filterQuery`: Parametr filterQuery jest ciągiem znaków, który jest używany do odfiltrowania
+  elementów na podstawie ich typu. Metoda doda elementy do przefiltrowanej listy tylko wtedy, gdy ich typ
+  pasuje do łańcucha filterQuery.
 
-#### Zwroty
-Metoda zwraca listę ciągów zawierających nazwy elementów, które pasują do
-filtruj zapytanie. Nazwy są konwertowane na wielkie litery przed dodaniem do listy.
+#### Returns
+Metoda zwraca listę ciągów znaków zawierającą nazwy elementów pasujących do zapytania filtra
+zapytanie filtrujące. Nazwy są konwertowane na wielkie litery przed dodaniem do listy.
 
-## Gra
+## Game
 Klasa Game inicjuje obiekt klasy DungeonLabyrinthGame i uruchamia grę.
 ### M:Main(System.String[])
-#### Streszczenie
+#### Summary
 Funkcja Main inicjuje obiekt klasy DungeonLabyrinthGame i uruchamia grę.
-
-## Program obsługi wejścia
-Klasa InputHandler zapewnia metody pobierania i sprawdzania poprawności danych wejściowych użytkownika na podstawie listy
-prawidłowe działania i aktualny stan programu.
+## InputHandler
+Klasa InputHandler udostępnia metody pobierania i sprawdzania poprawności danych wejściowych użytkownika w oparciu o listę
+prawidłowych akcji i bieżącego stanu programu.
 ### M:GetUserInput(List{String},CurrentState)
-#### Streszczenie
-Ta funkcja pobiera dane wejściowe użytkownika i weryfikuje je na podstawie listy prawidłowych działań oraz
-stan aktulany.
+#### Summary
+Ta funkcja pobiera dane wejściowe użytkownika i weryfikuje je względem listy prawidłowych akcji i
+bieżącym stanem.
 
-#### Parametry
-- `validActions`: Lista ciągów znaków reprezentujących możliwe działania użytkownika
-  może wybierać.
-- `CurrentState`: CurrentState to niestandardowy obiekt reprezentujący bieżący stan
-  gry lub programu. Może zawierać informacje, takie jak aktualna lokalizacja gracza,
-  inwentarz, stan zdrowia lub inne istotne dane. Metoda GetUserInput używa właściwości CurrentState
-  obiekt do sprawdzania poprawności danych wejściowych użytkownika na podstawie bieżącego stanu
+#### Parameters
+- `validActions`: Lista ciągów znaków reprezentujących możliwe działania, które użytkownik
+  może wybrać.
+- `CurrentState`: CurrentState jest niestandardowym obiektem reprezentującym aktualny stan gry lub programu.
+  gry lub programu. Może zawierać informacje takie jak aktualna lokalizacja gracza,
+  inwentarz, zdrowie lub inne istotne dane. Metoda GetUserInput używa obiektu CurrentState
+  aby zweryfikować dane wejściowe użytkownika w oparciu o CurrentState
 
-#### Zwroty
-Metoda zwraca ciąg, który jest zweryfikowanym wejściem użytkownika.
+#### Returns
+Metoda zwraca ciąg znaków, który jest zweryfikowaną informacją wprowadzoną przez użytkownika.
 
 ### M:ValidateInput(String,List{String},CurrentState)
-#### Streszczenie
-Funkcja sprawdza poprawność danych wprowadzonych przez użytkownika i wykonuje określone działania na podstawie danych wejściowych.
+#### Summary
+Funkcja sprawdza poprawność danych wprowadzonych przez użytkownika i wykonuje określone działania na podstawie tych danych.
 
-#### Parametry
-- `input`: ciąg reprezentujący dane wejściowe użytkownika do sprawdzenia
-- `validActions`: Lista prawidłowych działań wejściowych, które użytkownik może wprowadzić.
-- `CurrentState`: CurrentState to obiekt reprezentujący aktualny stan
-  gra lub gracz. Może zawierać informacje, takie jak statystyki gracza, wyposażenie,
+#### Parameters
+- `input`: ciąg znaków reprezentujący dane wejściowe użytkownika, które mają zostać zweryfikowane.
+- `validActions`: Lista prawidłowych akcji wejściowych, które użytkownik może wprowadzić.
+- `CurrentState`: CurrentState to obiekt reprezentujący aktualny stan gry lub gracza.
+  gry lub gracza. Może zawierać informacje takie jak statystyki gracza, wyposażenie,
   lokalizacja itp.
 
-#### Zwroty
+#### Returns
 Metoda zwraca wartość logiczną wskazującą, czy dane wejściowe znajdują się na liście
-ważne działania.
+ważnych akcji.
 
-## Przedmiot
-Klasa `Przedmiot` definiuje przedmiot, który gracz może zbierać i który jest umieszczany w niektórych komnatach.
-### M:Pokaż informacje o przedmiocie
-#### Streszczenie
-Funkcja wyświetla informacje o elemencie dużymi literami.
+## Item
+Klasa `Item` definiuje obiekt, który gracz może zebrać i który jest umieszczony w jakiejś komnacie.
+### M:ShowItemInfo
+#### Summary
+Funkcja wyświetla informacje o elemencie w formacie wielkich liter.
 
-## Potwór
-Klasa Monster definiuje właściwości i metody tworzenia potworów i zarządzania nimi w grze.
+
+## Monster
+Klasa `Monster` definiuje właściwości i metody do tworzenia i zarządzania potworami w grze.
 ### M:FightWithMonster(Player,List{String},CurrentState)
-#### Streszczenie
-Ta funkcja obsługuje walkę gracza z potworem przy użyciu wybranej broni
+#### Summary
+Ta funkcja obsługuje walkę między graczem a potworem, używając wybranej broni
 siłę i listę możliwych działań.
 
-#### Parametry
-- `Gracz`: Obiekt reprezentujący gracza w grze, z właściwościami takimi jak
+#### Parameters
+- `Player`: Obiekt reprezentujący gracza w grze, z właściwościami takimi jak
   zdrowie i wynik.
-- `answerList`: Lista możliwych działań, które gracz może wykonać podczas
-  walki, na przykład „ROLL”, aby rzucić kostką do ataku, lub „RETREAT”, aby wycofać się z miejsca
-  walka.
-- `chosenWeaponStrength`: Siła broni wybranej przez gracza dla
-  walka.
-- `CurrentState`: Bieżący
-- `CurrentState`: CurrentState to obiekt, który przechowuje aktualny stan
-  grę, w tym bieżącą scenę, obecną komnatę i inne istotne informacje. To jest
-  służy do śledzenia postępów w grze i podejmowania decyzji na podstawie decyzji gracza
-  działania.
-
+- `answerList`: Lista możliwych działań, które gracz może podjąć podczas walki, np.
+  walki, takie jak "ROLL", aby rzucić kośćmi do ataku lub "RETREAT", aby wycofać się z walki.
+  walki.
+- `chosenWeaponStrength`: Siła broni wybranej przez gracza do walki.
+  walki.
+- `CurrentState`: Aktualny
+- `CurrentState`: CurrentState jest obiektem, który przechowuje aktualny stan gry, w tym
+  gry, w tym aktualną scenę, aktualną komnatę i inne istotne informacje. Jest
+  służy do śledzenia postępów w grze i podejmowania decyzji na podstawie działań gracza.
+  działań gracza.
 ### M:DisplayFightStats(Monster,Int32)
-#### Streszczenie
-Ta funkcja wyświetla statystyki walki gracza i przeciwnika w sformatowanym formacie
-sposób.
+#### Summary
+Ta funkcja wyświetla statystyki walki gracza i przeciwnika w sformatowany sposób.
+sposób
 
-#### Parametry
-- `Monster`: Parametr Monster jest obiektem klasy Monster, który
-  zawiera informacje o wrogu, z którym walczy gracz, np
-  imię wroga, siłę i zdrowie.
-- `chosenWeaponStrength`: Siła broni wybranej przez gracza
+#### Parameters
+- `Monster`: Parametr potwora jest obiektem klasy potwora, który
+  zawiera informacje o przeciwniku, z którym walczy gracz, takie jak
+  nazwa wroga, jego siła i zdrowie.
+- `chosenWeaponStrength`: Siła broni, którą gracz wybrał do
   użyć w walce.
 
-## Gracz
-Klasa Player w C# reprezentuje gracza w grze i zawiera metody obsługi
-działania gracza, w tym odkrywanie princence, rozglądając się po pokoju, atakując lub
-wycofywanie się przed potworem, zbieranie przedmiotów i wybieranie pokoju, do którego chcesz wejść.
+## Player
+Klasa Player w języku C# reprezentuje gracza w grze i zawiera metody do obsługi działań gracza, w tym
+działania gracza, w tym odkrywanie księżniczki, rozglądanie się po pokoju, atakowanie lub
+wycofywanie się przed potworem, zbieranie przedmiotów i wybieranie pokoju, do którego chce się wejść.
 ### M:DungeonLabyrinth.Player.IsPlayerHolding(String)
-#### Streszczenie
-Funkcja sprawdza, czy gracz trzyma przedmiot określonego rodzaju.
+#### Summary
+Funkcja sprawdza, czy gracz posiada przedmiot określonego typu.
 
-#### Parametry
-- `type`: Parametr "type" jest ciągiem reprezentującym typ elementu, który
-  metoda polega na sprawdzeniu, czy gracz trzyma. Służy do porównania z „typem”
-  właściwości każdego przedmiotu na liście „wyposażenie”, aby zobaczyć, czy gracz trzyma przedmiot
-  ten typ.
+#### Parameters
+- `type`: Parametr "type" jest ciągiem znaków reprezentującym typ przedmiotu, który
+  metoda sprawdza, czy gracz go trzyma. Jest on używany do porównywania z właściwością "type"
+  każdego przedmiotu na liście "wyposażenia", aby sprawdzić, czy gracz trzyma przedmiot
+  tego typu.
 
-#### Zwroty
-Metoda `IsPlayerHolding` zwraca wartość logiczną. Zwraca wartość `true`, jeśli gracz jest
-przechowuje element określonego typu i `false` w przeciwnym razie.
+#### Returns
+Metoda `IsPlayerHolding` zwraca wartość logiczną. Zwraca ona `true`, jeśli gracz
+trzyma przedmiot określonego typu, a `false` w przeciwnym razie.
 
 ### M:PlayerChooseAction(CurrentState,List{String})
-#### Streszczenie
-Funkcja obsługuje działania gracza w grze, w tym odkrywanie księżniczki,
-rozglądanie się po pokoju, atakowanie lub wycofywanie się przed potworem, podnoszenie przedmiotów i
-wybór pokoju do wejścia.
+#### Summary
+Funkcja ta obsługuje działania gracza w grze, w tym odkrywanie księżniczki,
+rozglądanie się po pokoju, atakowanie lub wycofywanie się przed potworem, zbieranie przedmiotów i
+wybór pokoju, do którego chce się wejść.
 
-#### Parametry
-- `CurrentState`: CurrentState to obiekt, który zawiera aktualny stan
-  grę, w tym obecną komnatę, w której znajduje się gracz, poprzednią komnatę, w której przebywał gracz
-  w, wszelkie przedmioty trzymane przez gracza i wszelkie potwory, które mogą być obecne. Jest przyzwyczajony
-  śledzić postępy w grze i robić
+#### Parameters
+- `CurrentState`: CurrentState jest obiektem, który zawiera aktualny stan gry, w tym
+  gry, w tym aktualną komnatę, w której gracz się znajduje, poprzednią komnatę, w której gracz był
+  w której gracz się znajdował, wszelkie przedmioty, które gracz trzyma i wszelkie potwory, które mogą być obecne. Służy do
+  śledzenia postępów w grze i tworzenia
 
-- `answerList`: Lista możliwych działań, z których gracz może wybierać. Ten
-  lista jest czyszczona i aktualizowana na podstawie aktualnego stanu gry.
+- `answerList`: Lista możliwych działań, które gracz może wybrać. Ta
+  lista jest czyszczona i aktualizowana w oparciu o aktualny stan gry.
 
 ### M:HandlePlayerChoice(CurrentState,List{String})
-#### Streszczenie
+#### Summary
 Ta funkcja obsługuje wybory gracza podczas rozgrywki, w tym atakowanie, wycofywanie się,
-picie mikstur, wybieranie pokoju i zbieranie przedmiotów.
+picie mikstur, wybór pokoju i podnoszenie przedmiotów.
 
-#### Parametry
-- `CurrentState`: CurrentState to obiekt reprezentujący aktualny stan
-  gra. Zawiera informacje, takie jak aktualny pokój, w którym znajduje się gracz, pokój gracza
-  zdrowia i wyposażenia oraz aktualnej sceny gry.
-- `answerList`: answerList to lista ciągów znaków zawierająca możliwe działania
-  które gracz może przyjąć w bieżącym stanie gry. Metoda HandlePlayerChoice
-  używa tej listy, aby zachęcić gracza do wybrania akcji, a następnie obsługuje wybór gracza
+#### Parameters
+- `CurrentState`: CurrentState jest obiektem reprezentującym aktualny stan gry.
+  gry. Zawiera informacje takie jak aktualny pokój, w którym znajduje się gracz, jego
+  zdrowie i wyposażenie gracza oraz aktualna scena gry.
+- `answerList`: answerList jest listą ciągów znaków, która zawiera możliwe działania
+  które gracz może podjąć w bieżącym stanie gry. Metoda HandlePlayerChoice
+  używa tej listy, aby poprosić gracza o wybranie akcji, a następnie obsługuje wybór gracza
   odpowiednio.
 
 ### M:PlayerFightMonster(CurrentState,List{String})
-#### Streszczenie
-Funkcja pozwala graczowi wybrać broń i walczyć z potworem w grze.
+#### Summary
+Funkcja ta pozwala graczowi wybrać broń i walczyć z potworem w grze.
 
-#### Parametry
-- `CurrentState`: CurrentState to obiekt, który zawiera aktualny stan
-  grę, w tym obecną komnatę, w której znajduje się gracz, bieżący pokój, w którym znajduje się gracz, oraz
-  wszelkie przedmioty lub potwory obecne w pokoju.
-- `answerList`: Lista możliwych odpowiedzi, z których gracz może wybierać podczas
-  walka z potworem. Ta lista zawiera opcję wycofania się i wszelkie bronie, które są dostępne
-  gracz ma w swoim ekwipunku.
-## Księżniczka
-Klasa „Księżniczka” ma właściwości nazwy i opisu oraz konstruktora, który się inicjuje
-te właściwości. Księżniczka jest specjalną klasą, która po odkryciu przedmiotu tej klasy kończy grę.
+#### Parameters
+- `CurrentState`: CurrentState jest obiektem, który zawiera aktualny stan gry, w tym
+  gry, w tym aktualną komnatę, w której znajduje się gracz, aktualny pokój, w którym się znajduje, oraz
+  wszelkie przedmioty lub potwory obecne w pomieszczeniu.
+- `answerList`: Lista możliwych odpowiedzi, które gracz może wybrać podczas walki z potworem.
+  walki z potworem. Ta lista zawiera opcję odwrotu i wszelkie bronie, które gracz ma w swoim ekwipunku.
+  gracz posiada w swoim ekwipunku.
+## Princess
+Klasa `Princess` ma właściwości dla nazwy i opisu oraz konstruktor, który inicjalizuje te właściwości.
+te właściwości. Księżniczka jest klasą specjalną, której wykrycie powoduje zakończenie gry.

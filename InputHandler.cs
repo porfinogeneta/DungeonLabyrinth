@@ -1,3 +1,9 @@
+// autor: Szymon Mazurek, 338191
+// tytuł: "Dungeons The Text Game"
+// część: InputHandler.cs, analiza wejścia z konsoli poleceń
+// data: 17.06.2023
+
+
 using System;
 using System.Collections.Generic;
 

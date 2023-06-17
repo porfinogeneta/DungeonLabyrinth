@@ -1,3 +1,8 @@
+// autor: Szymon Mazurek, 338191
+// tytuł: "Dungeons The Text Game"
+// część: Functions.cs, definicje funkcji statycznych, użytecznych w innych obszarach gry
+// data: 17.06.2023
+
 using System;
 using System.Collections.Generic;
 

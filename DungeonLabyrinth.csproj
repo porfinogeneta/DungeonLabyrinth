@@ -54,6 +54,7 @@
     <ItemGroup>
       <Content Include="Docs.md" />
       <Content Include="DocsPL.md" />
+      <Content Include="UMLPostCoding.drawio.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

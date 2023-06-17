@@ -20,12 +20,14 @@ It's certainly worth noting that we pass the `currentState` object and `answerLi
 Those two things are the most crucial parts of the game. `currentState` object allows objects
 of unrelated classes to communicate and `answerList` holds the names of possible actions
 for a player. This list is constantly updated accordingly to the changes happening in the game.
+While playing one can find oneself in some of created chamber. Each chamber have a list of
+connections to the other chambers so player can travel through the game map.
 
 ## How to play?
 While playing you have access to all the actions listed in a scene. If you want to perform a certain
 action you have to type the action name (letter sizing doesn't matter) into the input field, when you type it
 press enter and if prompted correctly you will perform an action. Besides the listed actions
-one can also choose some build commands always accessible, those are:
+one can also choose some build in commands always accessible, those are:
 - `-H` which stands for HELP, prints out the list of possible commands
 - `-E` which stands for EQUIPMENT, prints out the list of the player's equipment, and might be useful for choosing the most powerful weapon
 - `-P` which stands for PLAYER, prints out all the player data, so name, score, health, and equipment
