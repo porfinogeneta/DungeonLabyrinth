@@ -203,15 +203,15 @@ strength and a list of possible actions.
   used to keep track of the game's progress and to make decisions based on the player's
   actions.
 
-### M:DisplayFightStats(Monster,Int32)
+### M:DisplayFightStats(Player,Int32)
 #### Summary
 This function displays the fight statistics of the player and the enemy in a formatted
 manner.
 
 #### Parameters
-- `Monster`: The Monster parameter is an object of the Monster class, which
-  contains information about the enemy that the player is fighting against, such as the
-  enemy's name, strength, and health.
+- `Player`: The Player parameter is an object of the Player class, which
+  contains information about the player that is fighting against a monster, such as the
+  name, strength, and health.
 - `chosenWeaponStrength`: The strength of the weapon that the player has chosen to
   use in the fight.
 

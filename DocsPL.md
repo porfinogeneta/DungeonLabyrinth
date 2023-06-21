@@ -201,15 +201,15 @@ siłę i listę możliwych działań.
   gry, w tym aktualną scenę, aktualną komnatę i inne istotne informacje. Jest
   służy do śledzenia postępów w grze i podejmowania decyzji na podstawie działań gracza.
   działań gracza.
-### M:DisplayFightStats(Monster,Int32)
+### M:DisplayFightStats(Player,Int32)
 #### Summary
 Ta funkcja wyświetla statystyki walki gracza i przeciwnika w sformatowany sposób.
 sposób
 
 #### Parameters
-- `Monster`: Parametr potwora jest obiektem klasy potwora, który
-  zawiera informacje o przeciwniku, z którym walczy gracz, takie jak
-  nazwa wroga, jego siła i zdrowie.
+- `Player`: Parametr `Player` jest obiektem klasy `Plyaer`, który
+  zawiera informacje o graczy, którym walczy z przeciwnikiem, takie jak
+  nazwa, jego siła i zdrowie.
 - `chosenWeaponStrength`: Siła broni, którą gracz wybrał do
   użyć w walce.
 

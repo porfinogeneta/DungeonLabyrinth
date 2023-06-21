@@ -63,10 +63,10 @@ namespace DungeonLabyrinth
             
             // add roll to the possible actions
             answerList.Add("ROLL");
-            while (this.health > 0 && this.health > 0)
+            while (player.health > 0 && this.health > 0)
             {
                 
-                DisplayFightStats(this, chosenWeaponStrength);
+                DisplayFightStats(player, chosenWeaponStrength);
                 
                 string ipt = InputHandler.GetUserInput(answerList, currentState);
                 if (ipt == "RETREAT")
@@ -83,7 +83,7 @@ namespace DungeonLabyrinth
                                       $"{(playerAttack >= monsterAttack ? "\n YOU WON!" : " \n YOU LOSE")}");
                     if (playerAttack >= monsterAttack)
                     {
-                        player.health -= playerAttack; // we decrease enemy health if the player won
+                        this.health -= playerAttack; // we decrease enemy health if the player won
                     }
                     else
                     {
@@ -93,7 +93,7 @@ namespace DungeonLabyrinth
             }
             // we broke out of the loop so either the player died or the monster is gone,
             // the fight is over
-            if (this.health <= 0)
+            if (player.health <= 0)
             {
                 Console.WriteLine("You got killed! Hopefully next time it would be better.");
                 currentState.currentScene = DungeonLabyrinthGame.GameScenes.GameOver; // set the scene to game over one
@@ -117,16 +117,16 @@ namespace DungeonLabyrinth
         /// enemy's name, strength, and health.</param>
         /// <param name="chosenWeaponStrength">The strength of the weapon that the player has chosen to
         /// use in the fight.</param>
-        private void DisplayFightStats(Monster enemy, int chosenWeaponStrength)
+        private void DisplayFightStats(Player player, int chosenWeaponStrength)
         {
             // PRINT OUT THE STATS OF PLAYER AND THE ENEMY, make the answers left aligned
-            Console.WriteLine($"{"You ",-15}{this.name,-15}\n" +
+            Console.WriteLine($"{"You ",-15}{player.name,-15}\n" +
                               $"{"strength: ",-15}{chosenWeaponStrength,-15}\n" +
-                              $"{"health: ",-15}{this.health,-15}\n" +
+                              $"{"health: ",-15}{player.health,-15}\n" +
                               $"{"",0}\n" +
-                              $"{"Enemy ",-15} {enemy.name}\n" +
-                              $"{"strength: ",-15}{enemy.strength,-15}\n" +
-                              $"{"health: ",-15}{enemy.health,-15}");
+                              $"{"Enemy ",-15} {this.name}\n" +
+                              $"{"strength: ",-15}{this.strength,-15}\n" +
+                              $"{"health: ",-15}{this.health,-15}");
         }
         
     }
