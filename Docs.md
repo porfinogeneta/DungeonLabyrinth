@@ -1,4 +1,8 @@
-﻿## Project Description
+﻿## Author
+- name: **Szymon Mazurek**
+- title **Dungeons The Text Game - documentation**
+
+## Project Description
 This is a simple text-based game that was created for Object Oriented Programming
 course at the University of Wroclaw. The purpose of the game is to find a Princess
 in a labyrinth of Dark Dungeons. Every chamber hides some secrets as well as dangerous enemies,

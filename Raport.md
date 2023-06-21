@@ -1,3 +1,9 @@
+# Autor
+- autor: **Szymon Mazurek**
+- tytuł: **Dungeons The Text Game**
+
+
+
 # Zmiany w strukturze projektu
 - Największa zmiana, jeżeli chodzi o strukturę projektu, jest całkowite zrezygnowanie.
 Z dziedziczenia przez klasę `Chamber ` oraz `Player ` danych z obiektu klasy `CurrentStatę `.
@@ -25,12 +31,12 @@ Oraz jakie powinny być w nich zawarte metody, oraz jakich pól będą potrzebow
 
 # Co jeszcze bym dopracował?
 - Na pewno przerobiłbym kod, tak aby był jeszcze bardziej czytelny, tyczy się to np. metod w klasie `Player `.
-- Dodałbym nowe funkcjonalności, takie jak:
-- podgląd mapy rozgrywki
-- 'ruchoma' księżniczka, tj. żeby mogła ona zmieniać swoje położenie w trakcie rozgrywki
-- większy wybór dostępnych w trakcie gry sprzętów
-- urozmaicenie rozgrywki poprzez dodanie innych interakcjami z grą oprócz ataków,
-może jakieś zagadki itp.
+- Dodałbym nowe możliwości, takie jak:
+  - podgląd mapy rozgrywki
+  - 'ruchoma' księżniczka, tj. żeby mogła ona zmieniać swoje położenie w trakcie rozgrywki
+  - większy wybór dostępnych w trakcie gry sprzętów
+  - urozmaicenie rozgrywki poprzez dodanie innych interakcjami z grą oprócz ataków,
+  może jakieś zagadki itp.
 
 # Czego się nauczyłem?
 - planowanie projektu, a jego realizacja mogą od siebie znacznie odbiegać

@@ -1,3 +1,7 @@
+## Autor
+- imię: **Szymon Mazurek**
+- tytuł **Dungeons The Text Game - dokumentacja**
+
 ## Opis Projektu
 Jest to prosta gra tekstowa stworzona z myślą o Kursie Pogramowania Obiektowego
 na Uniwersytecie Wrocławskim. Celem gry jest odnalezienie księżniczki
